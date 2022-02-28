@@ -134,7 +134,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {
       cart: cart,
-      productsInDb: productsInDb
+      productsInDb:
     },
   };
 }

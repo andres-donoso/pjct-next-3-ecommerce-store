@@ -53,14 +53,19 @@ const sql = connectOneTimeToDatabase();
 
 // connect to database
 // const sql = postgres();
-
+export type Product = {
+  id: number;
+  name: string;
+  type: string;
+  price: number;
+  quantity: number;
+};
 
 export async function getProducts() {
-  const products = await sql<Product>`
+  const products = await sql<Product[]>`
   SELECT * FROM products;
   `;
   return products;
-
 }
 console.log(product);
 
@@ -71,26 +76,10 @@ console.log(product);
 // `;
 // console.log('products :', products);
 
-export async function getSingleProduct(id) {
-  const [product] = await sql [Product  | undefined]`
-  --still an array
+export async function getSingleProduct(id: number) {
+  const [product] = await sql<[Product | undefined]>`
   SELECT * FROM products WHERE id = ${id};
 `;
-  return product;
-}
-
-export async function createProduct(
-  name,
-  type,
-  price,
-) {
-  const [product] = await sql[Product]`
-    INSERT INTO animals
-      (name, type, price)
-    VALUES
-      (${name}, ${type}, ${price})
-          RETURNING *
-  `;
   return product;
 }
 
